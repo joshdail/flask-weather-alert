@@ -1,0 +1,18 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Weather Alert
+{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<p><a href="{{ url_for('logout') }}">Log Out</a></p>
+<h2>Your Existing Alerts</h2>
+{% for alert in current_user.alerts %}
+<p>Alert for {{ alert.location }} scheduled for {{ alert.alert_time }}:00 a.m. <a href="{{url_for('delete_alert', alert_id=alert.id)}}">Delete</a></p>
+{% endfor %}
+<h2>Create New Alert</h2>
+<p>Select a location you would like an alert for, and select the time to send the alert.</p>
+{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+{% endblock %}

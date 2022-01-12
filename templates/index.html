@@ -1,0 +1,18 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Weather Alert
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to Weather Alert!</h1>
+{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+{% endblock %}
